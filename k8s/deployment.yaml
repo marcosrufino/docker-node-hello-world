@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: node-test
+  name: node-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: nodejs-docker-container-test
+  template:
+    metadata:
+      labels:
+        deployment: nodejs-docker-container-test
+    spec:
+      containers:
+        - image: image-registry.openshift-image-registry.svc:5000/marcosrufino-dev/nodejs-docker-container-test:latest
+          imagePullPolicy: Always
+          name: nodejs-docker-container-test
+          ports:
+            - containerPort: 3000
+              protocol: TCP
