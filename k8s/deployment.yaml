@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: node-test
-  name: node-test
+    app: nodejs-docker-container-test
+  name: nodejs-docker-container-test
 spec:
   replicas: 1
   selector:
