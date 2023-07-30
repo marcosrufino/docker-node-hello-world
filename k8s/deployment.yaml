@@ -15,7 +15,7 @@ spec:
         deployment: nodejs-docker-container-test
     spec:
       containers:
-        - image: image-registry.openshift-image-registry.svc:5000/marcosrufino-dev/nodejs-docker-container-test:latest
+        - image: $(params.IMAGE_NAME)
           imagePullPolicy: Always
           name: nodejs-docker-container-test
           ports:
