@@ -2,21 +2,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: $(params.APP_NAME)
+    app: $(APP_NAME)
+  name: $(APP_NAME)
 spec:
   replicas: 1
   selector:
     matchLabels:
-      deployment: $(params.APP_NAME)
+      deployment: $(APP_NAME)
   template:
     metadata:
       labels:
-        deployment: $(params.APP_NAME)
+        deployment: $(APP_NAME)
     spec:
       containers:
-        - image: $(params.IMAGE_NAME)
+        - image: image-registry.openshift-image-registry.svc:5000/marcosrufino-dev/$(APP_NAME):latest
           imagePullPolicy: Always
-          name: $(params.APP_NAME)
+          name: $(APP_NAME)
           ports:
             - containerPort: 3000
               protocol: TCP
+          env:
+            - name: APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: nodejs-docker-container-test  # Substitua pelo nome do seu ConfigMap
+                  key: APP_NAME
