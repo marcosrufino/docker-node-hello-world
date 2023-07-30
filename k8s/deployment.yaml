@@ -2,22 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nodejs-docker-container-test
-  name: nodejs-docker-container-test
+    app: $(params.APP_NAME)
 spec:
   replicas: 1
   selector:
     matchLabels:
-      deployment: nodejs-docker-container-test
+      deployment: $(params.APP_NAME)
   template:
     metadata:
       labels:
-        deployment: nodejs-docker-container-test
+        deployment: $(params.APP_NAME)
     spec:
       containers:
         - image: $(params.IMAGE_NAME)
           imagePullPolicy: Always
-          name: nodejs-docker-container-test
+          name: $(params.APP_NAME)
           ports:
             - containerPort: 3000
               protocol: TCP
